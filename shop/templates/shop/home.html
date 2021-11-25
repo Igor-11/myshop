@@ -1,0 +1,22 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+   {% for product in products %}
+   <div>
+    <img src='{{product.image.url}}' alt='Product image'>
+    <h2><a href = "{% url 'shop:product_detail' product.id %}">{{product.name}}</a></h2>
+    {% if product.stock %}
+    <div data-toggle='tooltip' title='{{product.stock.description}}'> 
+       <img src="{% static 'img/star.png' %}" alt='Star'>
+       <span>{{product.stock.title}}</span>
+    </div>
+    {% endif %}
+    <p>{{product.rating}}</p>
+    <p>{{product.price}}</p>
+   </div>
+   {%endfor%}
+{% endblock %}
